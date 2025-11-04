@@ -1,0 +1,30 @@
+meta {
+  name: Get zoneTag
+  type: graphql
+  seq: 3
+}
+
+post {
+  url: https://api.cloudflare.com/client/v4/graphql
+  body: graphql
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer g29zrxuDBV3FfsTpC3q4_sFeFgFyz-ztlDO_p-T1
+}
+
+body:graphql {
+  query GetZones {
+    viewer {
+      zones {
+        zoneTag
+      }
+    }
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,37 @@
+meta {
+  name: Get account
+  type: graphql
+  seq: 4
+}
+
+post {
+  url: https://api.cloudflare.com/client/v4/graphql
+  body: graphql
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer g29zrxuDBV3FfsTpC3q4_sFeFgFyz-ztlDO_p-T1
+}
+
+body:graphql {
+  query GetAccounts {
+    viewer {
+      accounts(filter: { accountTag: $accountTag })
+      {
+        accountTag
+      }
+    }
+  }
+  
+}
+
+body:graphql:vars {
+  {
+    "accountTag": "2af5100754a8644e0e2a576365803123"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

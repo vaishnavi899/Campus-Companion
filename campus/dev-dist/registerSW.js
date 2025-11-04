@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) navigator.serviceWorker.register('/jportal/dev-sw.js?dev-sw', { scope: '/jportal/', type: 'classic' })

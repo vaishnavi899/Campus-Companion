@@ -1,0 +1,67 @@
+these are all the colors currently used in the app. this can be used as reference when creating (or using) a theming engine
+
+App.jsx
+#191c20 (background color for main container and loading screen) hsl(214 12.3% 11.2%)
+text-red-500 (error message color) 0 84.2% 60.2%
+text-white (text color for loading screen)
+
+Attendance.jsx
+#191c20 (background color for sticky header and select elements) hsl(214 12.3% 11.2%)
+text-white (text color for select elements and input)
+
+AttendanceCard.jsx
+#191c20 (background color for sheet content) hsl(214 12.3% 11.2%)
+text-gray-500 (text color for head_cell in calendar) 220 8.9% 46.1%
+text-gray-400 (text color for class data) 217.9 10.6% 64.9%
+text-white (text color for subject name and calendar)
+rgba(22, 163, 72, 0.4) (background color for present days in calendar) hsla(141 76.2% 36.3% / 0.4)
+rgba(220, 38, 38, 0.4) (background color for absent days in calendar) hsla(0 72.2% 50.6% / 0.4)
+
+CircleProgress.jsx
+#a3c9fe (stroke color for circle) hsl(215 97.8% 81.8%)
+fill-white (text color)
+
+Exams.jsx
+#191c20 (background color for SelectTrigger and SelectContent) hsl(214 12.3% 11.2%)
+text-white (text color for SelectTrigger and SelectContent)
+border-white (border color for SelectTrigger and SelectContent)
+
+Grades.jsx
+#191c20 (background color for tabs and select trigger) hsl(214 12.3% 11.2%)
+#1f2937 (background color for active tab trigger) hsl(215 27.9% 16.9%)
+#374151 (stroke color for CartesianGrid and tooltip background) hsl(217 19.1% 26.7%)
+#9CA3AF (stroke color for XAxis and YAxis) hsl(218 10.6% 64.9%)
+#4ADE80 (stroke color for SGPA line and dot) hsl(142 69.2% 58%)
+#60A5FA (stroke color for CGPA line and dot) #60a5fa
+text-white (text color for loading, error, and select trigger)
+text-green-400 (text color for SGPA value) 141.9 69.2% 58%
+text-blue-400 (text color for CGPA value) 213.1 93.9% 67.8%
+text-gray-400 (text color for semester details and labels) 217.9 10.6% 64.9%
+border-gray-700 (border color for semester details) 216.9 19.1% 26.7%
+border-white (border color for select trigger and content)
+
+GradeCard.jsx
+border-gray-700 (border color for card) 216.9 19.1% 26.7%
+text-gray-400 (text color for grade and credits labels) 217.9 10.6% 64.9%
+text-blue-400 (text color for course credit points) 217.9 10.6% 64.9%
+
+Navbar.jsx
+#242a32 (background color for navbar) hsl(214 16.3% 16.9%)
+text-white (text color for navbar items)
+hover:bg-gray-700 (hover background color for navbar items) 216.9 19.1% 26.7%
+
+Profile.jsx
+#191c20 (background color for sections) hsl(214 12.3% 11.2%)
+text-white (text color for text)
+border-white/10 (border color for sections)
+text-gray-400 (text color for labels) 217.9 10.6% 64.9%
+text-blue-400 (link color) 217.9 10.6% 64.9%
+
+SubjectInfoCard.jsx
+border-gray-700 (border color for card) 216.9 19.1% 26.7%
+text-gray-400 (text color for labels) 217.9 10.6% 64.9%
+
+Subjects.jsx
+#191c20 (background color for SelectTrigger and SelectContent) hsl(214 12.3% 11.2%)
+text-white (text color for text)
+border-white (border color for SelectTrigger and SelectContent)

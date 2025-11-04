@@ -1,0 +1,19 @@
+meta {
+  name: Verify Token
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://api.cloudflare.com/client/v4/user/tokens/verify
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer g29zrxuDBV3FfsTpC3q4_sFeFgFyz-ztlDO_p-T1
+}
+
+settings {
+  encodeUrl: false
+}

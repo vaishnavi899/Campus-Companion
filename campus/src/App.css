@@ -1,0 +1,5 @@
+/* Add these styles to your App.css */
+body, #root {
+  background-color: #191c20;
+  min-height: 100vh;
+}
