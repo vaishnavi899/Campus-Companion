@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Dependency and build directories
 node_modules
 dist
 dist-ssr
@@ -23,14 +24,23 @@ dist-ssr
 *.sln
 *.sw?
 
-
-#vite
+# Vite cache
 .vite
 
-
+# Local development builds
 jportal/dev-dist
 
+# Certificates
 certs/
+
+# Misc files
 CLAUDE.md
 
+# Environment files
 *.env
+
+# --- Project-specific ignores ---
+# Do not track local vector store, models, and data folders
+data/
+chroma_db/
+models/

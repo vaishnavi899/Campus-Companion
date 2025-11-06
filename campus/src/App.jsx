@@ -16,86 +16,64 @@ import { Toaster } from "./components/ui/sonner";
 import "./App.css";
 
 import { WebPortal, LoginError } from "https://cdn.jsdelivr.net/npm/jsjiit@0.0.20/dist/jsjiit.esm.js";
-
 import MockWebPortal from "./components/MockWebPortal";
 import { TriangleAlert } from "lucide-react";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
+// 🟩 Add this import
+import ChatWidget from "./components/ChatWidget";
 
 const queryClient = new QueryClient();
 
-// Create both portal instances at the top level
+// Create both portal instances
 const realPortal = new WebPortal();
 const mockPortal = new MockWebPortal();
 
-// Create a wrapper component to use the useNavigate hook
 function AuthenticatedApp({ w, setIsAuthenticated, setIsDemoMode }) {
   const [activeAttendanceTab, setActiveAttendanceTab] = useState("overview");
   const [attendanceData, setAttendanceData] = useState({});
   const [attendanceSemestersData, setAttendanceSemestersData] = useState(null);
-
   const [subjectData, setSubjectData] = useState({});
   const [subjectSemestersData, setSubjectSemestersData] = useState(null);
-
   const [gradesData, setGradesData] = useState({});
   const [gradesSemesterData, setGradesSemesterData] = useState(null);
-
   const [selectedAttendanceSem, setSelectedAttendanceSem] = useState(null);
   const [selectedGradesSem, setSelectedGradesSem] = useState(null);
   const [selectedSubjectsSem, setSelectedSubjectsSem] = useState(null);
-
   const [attendanceDailyDate, setAttendanceDailyDate] = useState(new Date());
   const [isAttendanceCalendarOpen, setIsAttendanceCalendarOpen] = useState(false);
   const [isAttendanceTrackerOpen, setIsAttendanceTrackerOpen] = useState(false);
   const [attendanceSubjectCacheStatus, setAttendanceSubjectCacheStatus] = useState({});
-
-  // Add attendance goal state
   const [attendanceGoal, setAttendanceGoal] = useState(() => {
     const savedGoal = localStorage.getItem("attendanceGoal");
-    return savedGoal ? parseInt(savedGoal) : 75; // Default to 75% if not set
+    return savedGoal ? parseInt(savedGoal) : 75;
   });
 
-  // Add effect to save goal to localStorage when it changes
   useEffect(() => {
     localStorage.setItem("attendanceGoal", attendanceGoal.toString());
   }, [attendanceGoal]);
 
-  // Add new profile data state
   const [profileData, setProfileData] = useState(null);
-
-  // Add new state for grades component
   const [activeGradesTab, setActiveGradesTab] = useState("overview");
   const [gradeCardSemesters, setGradeCardSemesters] = useState([]);
   const [selectedGradeCardSem, setSelectedGradeCardSem] = useState(null);
   const [gradeCard, setGradeCard] = useState(null);
-
-  // Add new state for storing grade cards
   const [gradeCards, setGradeCards] = useState({});
-
-  // Add new states for subject attendance
   const [subjectAttendanceData, setSubjectAttendanceData] = useState({});
   const [selectedSubject, setSelectedSubject] = useState(null);
-
-  // Add new state for exams
   const [examSchedule, setExamSchedule] = useState({});
   const [examSemesters, setExamSemesters] = useState([]);
   const [selectedExamSem, setSelectedExamSem] = useState(null);
   const [selectedExamEvent, setSelectedExamEvent] = useState(null);
-
-  // Add new state for marks
   const [marksSemesters, setMarksSemesters] = useState([]);
   const [selectedMarksSem, setSelectedMarksSem] = useState(null);
   const [marksSemesterData, setMarksSemesterData] = useState(null);
   const [marksData, setMarksData] = useState({});
-
-  // Add these new states lifted from Grades.jsx
   const [gradesLoading, setGradesLoading] = useState(true);
   const [gradesError, setGradesError] = useState(null);
   const [gradeCardLoading, setGradeCardLoading] = useState(false);
   const [isDownloadDialogOpen, setIsDownloadDialogOpen] = useState(false);
   const [marksLoading, setMarksLoading] = useState(false);
-
-  // Add these new states lifted from Attendance.jsx
   const [isAttendanceMetaLoading, setIsAttendanceMetaLoading] = useState(true);
   const [isAttendanceDataLoading, setIsAttendanceDataLoading] = useState(true);
 
@@ -104,6 +82,7 @@ function AuthenticatedApp({ w, setIsAuthenticated, setIsDemoMode }) {
       <div className="sticky top-0 z-30 bg-background -mt-[2px]">
         <Header setIsAuthenticated={setIsAuthenticated} setIsDemoMode={setIsDemoMode} />
       </div>
+
       <Routes>
         <Route path="/" element={<Navigate to="/attendance" />} />
         <Route path="/login" element={<Navigate to="/attendance" />} />
@@ -141,6 +120,7 @@ function AuthenticatedApp({ w, setIsAuthenticated, setIsDemoMode }) {
             />
           }
         />
+
         <Route
           path="/grades"
           element={
@@ -181,6 +161,7 @@ function AuthenticatedApp({ w, setIsAuthenticated, setIsDemoMode }) {
             />
           }
         />
+
         <Route
           path="/exams"
           element={
@@ -197,6 +178,7 @@ function AuthenticatedApp({ w, setIsAuthenticated, setIsDemoMode }) {
             />
           }
         />
+
         <Route
           path="/subjects"
           element={
@@ -211,8 +193,23 @@ function AuthenticatedApp({ w, setIsAuthenticated, setIsDemoMode }) {
             />
           }
         />
-        <Route path="/profile" element={<Profile w={w} profileData={profileData} setProfileData={setProfileData} />} />
+
+        <Route
+          path="/profile"
+          element={
+            <Profile
+              w={w}
+              profileData={profileData}
+              setProfileData={setProfileData}
+            />
+          }
+        />
       </Routes>
+
+      {/* ✅ ChatWidget popup */}
+      <ChatWidget />
+
+      {/* ✅ Bottom Navbar */}
       <Navbar />
     </div>
   );
@@ -223,18 +220,12 @@ function LoginWrapper({ onLoginSuccess, onDemoLogin, w }) {
 
   const handleLoginSuccess = () => {
     onLoginSuccess();
-    // Add a small delay to ensure state updates before navigation
-    setTimeout(() => {
-      navigate("/attendance");
-    }, 100);
+    setTimeout(() => navigate("/attendance"), 100);
   };
 
   const handleDemoLogin = () => {
     onDemoLogin();
-    // Add a small delay to ensure state updates before navigation
-    setTimeout(() => {
-      navigate("/attendance");
-    }, 100);
+    setTimeout(() => navigate("/attendance"), 100);
   };
 
   return <Login onLoginSuccess={handleLoginSuccess} onDemoLogin={handleDemoLogin} w={w} />;
@@ -246,7 +237,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Determine which portal to use based on demo mode
   const activePortal = isDemoMode ? mockPortal : realPortal;
 
   useEffect(() => {
@@ -269,9 +259,7 @@ function App() {
         ) {
           setError("JIIT Web Portal server is temporarily unavailable. Please try again later.");
         } else if (error instanceof LoginError && error.message.includes("Failed to fetch")) {
-          setError(
-            "Please check your internet connection. If connected, JIIT Web Portal server is temporarily unavailable."
-          );
+          setError("Please check your internet connection. If connected, JIIT Web Portal server is temporarily unavailable.");
         } else {
           console.error("Auto-login failed:", error);
           setError("Auto-login failed. Please login again.");
@@ -334,10 +322,7 @@ function App() {
           <Router>
             <div className="min-h-screen bg-background select-none">
               <Routes>
-                {/* Public route - accessible without authentication */}
                 <Route path="/stats" element={<Cloudflare />} />
-
-                {/* Protected routes - require authentication */}
                 {!isAuthenticated ? (
                   <Route
                     path="*"
@@ -373,4 +358,5 @@ function App() {
   );
 }
 
+// ✅ Proper default export added
 export default App;
