@@ -211,6 +211,8 @@ def ask():
     # --------------------------------------------------
     prompt = format_prompt(question, context)
     generated_answer = generate_answer(prompt)
+   
+
 
     # --------------------------------------------------
     # Step 3: Optional Evaluator Accuracy
