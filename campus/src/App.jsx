@@ -78,139 +78,153 @@ function AuthenticatedApp({ w, setIsAuthenticated, setIsDemoMode }) {
   const [isAttendanceDataLoading, setIsAttendanceDataLoading] = useState(true);
 
   return (
-    <div className="min-h-screen pb-14 select-none">
-      <div className="sticky top-0 z-30 bg-background -mt-[2px]">
+    <div className="min-h-screen pb-14 select-none relative overflow-hidden">
+      {/* Beautiful animated background gradient */}
+      <div className="fixed inset-0 -z-10 bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-blue-950 dark:to-purple-950 animate-gradient-shift"></div>
+      
+      {/* Decorative floating shapes */}
+      <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/20 dark:bg-blue-500/10 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute top-40 right-20 w-96 h-96 bg-purple-200/20 dark:bg-purple-500/10 rounded-full blur-3xl animate-float-delayed"></div>
+        <div className="absolute bottom-20 left-1/3 w-80 h-80 bg-pink-200/20 dark:bg-pink-500/10 rounded-full blur-3xl animate-float-slow"></div>
+      </div>
+
+      <div className="sticky top-0 z-30 bg-background/80 backdrop-blur-xl -mt-[2px] border-b border-border/40 shadow-lg shadow-black/5">
         <Header setIsAuthenticated={setIsAuthenticated} setIsDemoMode={setIsDemoMode} />
       </div>
 
-      <Routes>
-        <Route path="/" element={<Navigate to="/attendance" />} />
-        <Route path="/login" element={<Navigate to="/attendance" />} />
-        <Route
-          path="/attendance"
-          element={
-            <Attendance
-              w={w}
-              attendanceData={attendanceData}
-              setAttendanceData={setAttendanceData}
-              semestersData={attendanceSemestersData}
-              setSemestersData={setAttendanceSemestersData}
-              selectedSem={selectedAttendanceSem}
-              setSelectedSem={setSelectedAttendanceSem}
-              attendanceGoal={attendanceGoal}
-              setAttendanceGoal={setAttendanceGoal}
-              subjectAttendanceData={subjectAttendanceData}
-              setSubjectAttendanceData={setSubjectAttendanceData}
-              selectedSubject={selectedSubject}
-              setSelectedSubject={setSelectedSubject}
-              isAttendanceMetaLoading={isAttendanceMetaLoading}
-              setIsAttendanceMetaLoading={setIsAttendanceMetaLoading}
-              isAttendanceDataLoading={isAttendanceDataLoading}
-              setIsAttendanceDataLoading={setIsAttendanceDataLoading}
-              activeTab={activeAttendanceTab}
-              setActiveTab={setActiveAttendanceTab}
-              dailyDate={attendanceDailyDate}
-              setDailyDate={setAttendanceDailyDate}
-              calendarOpen={isAttendanceCalendarOpen}
-              setCalendarOpen={setIsAttendanceCalendarOpen}
-              isTrackerOpen={isAttendanceTrackerOpen}
-              setIsTrackerOpen={setIsAttendanceTrackerOpen}
-              subjectCacheStatus={attendanceSubjectCacheStatus}
-              setSubjectCacheStatus={setAttendanceSubjectCacheStatus}
-            />
-          }
-        />
+      <div className="relative z-10">
+        <Routes>
+          <Route path="/" element={<Navigate to="/attendance" />} />
+          <Route path="/login" element={<Navigate to="/attendance" />} />
+          <Route
+            path="/attendance"
+            element={
+              <Attendance
+                w={w}
+                attendanceData={attendanceData}
+                setAttendanceData={setAttendanceData}
+                semestersData={attendanceSemestersData}
+                setSemestersData={setAttendanceSemestersData}
+                selectedSem={selectedAttendanceSem}
+                setSelectedSem={setSelectedAttendanceSem}
+                attendanceGoal={attendanceGoal}
+                setAttendanceGoal={setAttendanceGoal}
+                subjectAttendanceData={subjectAttendanceData}
+                setSubjectAttendanceData={setSubjectAttendanceData}
+                selectedSubject={selectedSubject}
+                setSelectedSubject={setSelectedSubject}
+                isAttendanceMetaLoading={isAttendanceMetaLoading}
+                setIsAttendanceMetaLoading={setIsAttendanceMetaLoading}
+                isAttendanceDataLoading={isAttendanceDataLoading}
+                setIsAttendanceDataLoading={setIsAttendanceDataLoading}
+                activeTab={activeAttendanceTab}
+                setActiveTab={setActiveAttendanceTab}
+                dailyDate={attendanceDailyDate}
+                setDailyDate={setAttendanceDailyDate}
+                calendarOpen={isAttendanceCalendarOpen}
+                setCalendarOpen={setIsAttendanceCalendarOpen}
+                isTrackerOpen={isAttendanceTrackerOpen}
+                setIsTrackerOpen={setIsAttendanceTrackerOpen}
+                subjectCacheStatus={attendanceSubjectCacheStatus}
+                setSubjectCacheStatus={setAttendanceSubjectCacheStatus}
+              />
+            }
+          />
 
-        <Route
-          path="/grades"
-          element={
-            <Grades
-              w={w}
-              gradesData={gradesData}
-              setGradesData={setGradesData}
-              semesterData={gradesSemesterData}
-              setSemesterData={setGradesSemesterData}
-              activeTab={activeGradesTab}
-              setActiveTab={setActiveGradesTab}
-              gradeCardSemesters={gradeCardSemesters}
-              setGradeCardSemesters={setGradeCardSemesters}
-              selectedGradeCardSem={selectedGradeCardSem}
-              setSelectedGradeCardSem={setSelectedGradeCardSem}
-              gradeCard={gradeCard}
-              setGradeCard={setGradeCard}
-              gradeCards={gradeCards}
-              setGradeCards={setGradeCards}
-              marksSemesters={marksSemesters}
-              setMarksSemesters={setMarksSemesters}
-              selectedMarksSem={selectedMarksSem}
-              setSelectedMarksSem={setSelectedMarksSem}
-              marksSemesterData={marksSemesterData}
-              setMarksSemesterData={setMarksSemesterData}
-              marksData={marksData}
-              setMarksData={setMarksData}
-              gradesLoading={gradesLoading}
-              setGradesLoading={setGradesLoading}
-              gradesError={gradesError}
-              setGradesError={setGradesError}
-              gradeCardLoading={gradeCardLoading}
-              setGradeCardLoading={setGradeCardLoading}
-              isDownloadDialogOpen={isDownloadDialogOpen}
-              setIsDownloadDialogOpen={setIsDownloadDialogOpen}
-              marksLoading={marksLoading}
-              setMarksLoading={setMarksLoading}
-            />
-          }
-        />
+          <Route
+            path="/grades"
+            element={
+              <Grades
+                w={w}
+                gradesData={gradesData}
+                setGradesData={setGradesData}
+                semesterData={gradesSemesterData}
+                setSemesterData={setGradesSemesterData}
+                activeTab={activeGradesTab}
+                setActiveTab={setActiveGradesTab}
+                gradeCardSemesters={gradeCardSemesters}
+                setGradeCardSemesters={setGradeCardSemesters}
+                selectedGradeCardSem={selectedGradeCardSem}
+                setSelectedGradeCardSem={setSelectedGradeCardSem}
+                gradeCard={gradeCard}
+                setGradeCard={setGradeCard}
+                gradeCards={gradeCards}
+                setGradeCards={setGradeCards}
+                marksSemesters={marksSemesters}
+                setMarksSemesters={setMarksSemesters}
+                selectedMarksSem={selectedMarksSem}
+                setSelectedMarksSem={setSelectedMarksSem}
+                marksSemesterData={marksSemesterData}
+                setMarksSemesterData={setMarksSemesterData}
+                marksData={marksData}
+                setMarksData={setMarksData}
+                gradesLoading={gradesLoading}
+                setGradesLoading={setGradesLoading}
+                gradesError={gradesError}
+                setGradesError={setGradesError}
+                gradeCardLoading={gradeCardLoading}
+                setGradeCardLoading={setGradeCardLoading}
+                isDownloadDialogOpen={isDownloadDialogOpen}
+                setIsDownloadDialogOpen={setIsDownloadDialogOpen}
+                marksLoading={marksLoading}
+                setMarksLoading={setMarksLoading}
+              />
+            }
+          />
 
-        <Route
-          path="/exams"
-          element={
-            <Exams
-              w={w}
-              examSchedule={examSchedule}
-              setExamSchedule={setExamSchedule}
-              examSemesters={examSemesters}
-              setExamSemesters={setExamSemesters}
-              selectedExamSem={selectedExamSem}
-              setSelectedExamSem={setSelectedExamSem}
-              selectedExamEvent={selectedExamEvent}
-              setSelectedExamEvent={setSelectedExamEvent}
-            />
-          }
-        />
+          <Route
+            path="/exams"
+            element={
+              <Exams
+                w={w}
+                examSchedule={examSchedule}
+                setExamSchedule={setExamSchedule}
+                examSemesters={examSemesters}
+                setExamSemesters={setExamSemesters}
+                selectedExamSem={selectedExamSem}
+                setSelectedExamSem={setSelectedExamSem}
+                selectedExamEvent={selectedExamEvent}
+                setSelectedExamEvent={setSelectedExamEvent}
+              />
+            }
+          />
 
-        <Route
-          path="/subjects"
-          element={
-            <Subjects
-              w={w}
-              subjectData={subjectData}
-              setSubjectData={setSubjectData}
-              semestersData={subjectSemestersData}
-              setSemestersData={setSubjectSemestersData}
-              selectedSem={selectedSubjectsSem}
-              setSelectedSem={setSelectedSubjectsSem}
-            />
-          }
-        />
+          <Route
+            path="/subjects"
+            element={
+              <Subjects
+                w={w}
+                subjectData={subjectData}
+                setSubjectData={setSubjectData}
+                semestersData={subjectSemestersData}
+                setSemestersData={setSubjectSemestersData}
+                selectedSem={selectedSubjectsSem}
+                setSelectedSem={setSelectedSubjectsSem}
+              />
+            }
+          />
 
-        <Route
-          path="/profile"
-          element={
-            <Profile
-              w={w}
-              profileData={profileData}
-              setProfileData={setProfileData}
-            />
-          }
-        />
-      </Routes>
+          <Route
+            path="/profile"
+            element={
+              <Profile
+                w={w}
+                profileData={profileData}
+                setProfileData={setProfileData}
+              />
+            }
+          />
+        </Routes>
+      </div>
 
       {/* ✅ ChatWidget popup */}
       <ChatWidget />
 
-      {/* ✅ Bottom Navbar */}
-      <Navbar />
+      {/* ✅ Bottom Navbar with glass effect */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 bg-background/80 backdrop-blur-xl border-t border-border/40 shadow-2xl shadow-black/10">
+        <Navbar />
+      </div>
     </div>
   );
 }
@@ -291,8 +305,22 @@ function App() {
         <ThemeScript />
         <ThemeProvider>
           <DynamicFontLoader />
-          <div className="min-h-screen flex items-center justify-center bg-background text-foreground">
-            Signing in...
+          <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-blue-950 dark:to-purple-950 text-foreground relative overflow-hidden">
+            {/* Animated background */}
+            <div className="absolute inset-0 overflow-hidden pointer-events-none">
+              <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-200/30 dark:bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+              <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-200/30 dark:bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "1s" }}></div>
+            </div>
+            
+            {/* Loading content */}
+            <div className="relative z-10 text-center">
+              <div className="mb-6 flex justify-center">
+                <div className="w-16 h-16 border-4 border-blue-200 dark:border-blue-800 border-t-blue-600 dark:border-t-blue-400 rounded-full animate-spin"></div>
+              </div>
+              <p className="text-lg font-semibold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-pulse">
+                Signing in...
+              </p>
+            </div>
           </div>
         </ThemeProvider>
       </>
@@ -328,7 +356,13 @@ function App() {
                     path="*"
                     element={
                       <>
-                        {error && <div className="text-destructive text-center pt-4">{error}</div>}
+                        {error && (
+                          <div className="text-destructive text-center pt-4 px-4 animate-shake">
+                            <div className="inline-block bg-destructive/10 border border-destructive/20 rounded-lg px-4 py-2 backdrop-blur-sm">
+                              {error}
+                            </div>
+                          </div>
+                        )}
                         <LoginWrapper
                           onLoginSuccess={handleRealLogin}
                           onDemoLogin={handleDemoLogin}
@@ -354,6 +388,78 @@ function App() {
           </Router>
         </QueryClientProvider>
       </ThemeProvider>
+      
+      {/* Add custom animations CSS */}
+      <style>{`
+        @keyframes gradient-shift {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+          }
+          50% {
+            transform: translateY(-30px) translateX(20px);
+          }
+        }
+        
+        @keyframes float-delayed {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+          }
+          50% {
+            transform: translateY(30px) translateX(-20px);
+          }
+        }
+        
+        @keyframes float-slow {
+          0%, 100% {
+            transform: translateY(0) translateX(0);
+          }
+          50% {
+            transform: translateY(-20px) translateX(-30px);
+          }
+        }
+        
+        @keyframes shake {
+          0%, 100% {
+            transform: translateX(0);
+          }
+          25% {
+            transform: translateX(-10px);
+          }
+          75% {
+            transform: translateX(10px);
+          }
+        }
+        
+        .animate-gradient-shift {
+          background-size: 200% 200%;
+          animation: gradient-shift 15s ease infinite;
+        }
+        
+        .animate-float {
+          animation: float 20s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+          animation: float-delayed 25s ease-in-out infinite;
+        }
+        
+        .animate-float-slow {
+          animation: float-slow 30s ease-in-out infinite;
+        }
+        
+        .animate-shake {
+          animation: shake 0.5s ease-in-out;
+        }
+      `}</style>
     </>
   );
 }
